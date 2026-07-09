@@ -1,0 +1,125 @@
+/**
+ * Lean Admin — MetaMenu runtime styles.
+ *
+ * Self-similar flyout cascade (origin pattern doc Step 4): each level is
+ * absolutely positioned off its parent's inline-end edge, so the same rule
+ * nests infinitely. `inset-inline-start` (not `left`) makes it RTL-safe. Only
+ * styles our own `.la-mm-*` markup — never WordPress's native `.wp-submenu`.
+ */
+
+#adminmenu .la-mm-root {
+	display: contents;
+}
+
+#adminmenu .la-mm-root .la-mm-flyout {
+	position: absolute;
+	inset-inline-start: 100%;
+	top: 0;
+	z-index: 9990;
+	display: none;
+	min-width: 180px;
+	margin: 0;
+	padding: 5px 0;
+	background: #2c3338;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+#adminmenu .la-mm-root .la-mm-flyout.is-visible {
+	display: block;
+}
+
+/* A nested flyout pops out off its own parent's edge — same rule, deeper. */
+#adminmenu .la-mm-root .la-mm-flyout .la-mm-flyout {
+	inset-inline-start: 100%;
+	top: -5px;
+}
+
+/* Edge-flip: a deep panel that would overflow opens leftward instead. */
+#adminmenu .la-mm-root .la-mm-flip > .la-mm-flyout {
+	inset-inline-start: auto;
+	inset-inline-end: 100%;
+}
+
+#adminmenu .la-mm-root .la-mm-item {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	list-style: none;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+	font-weight: 400 !important;
+	font-style: normal !important;
+	font-size: 14px !important;
+	letter-spacing: normal !important;
+	text-transform: none !important;
+}
+
+#adminmenu .la-mm-root .la-mm-item > a {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 7px 14px;
+	color: #c3c4c7;
+	text-decoration: none;
+	line-height: 1.4;
+	white-space: nowrap;
+	/* Override-only resets — force the default WordPress admin font on every
+	   label so a plugin's injected font/weight/casing is stripped and all rows
+	   read uniformly. The full stack is declared explicitly (not `inherit`) so
+	   it cannot pick up a plugin's font off an ancestor #adminmenu rule.
+	   !important is required to beat plugins that style their own #adminmenu
+	   anchors with !important. Do not remove as "redundant": that reintroduces
+	   the leakage. text-transform:none preserves the PHP-applied Title Case. */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+	font-weight: 400 !important;
+	font-style: normal !important;
+	font-size: 14px !important;
+	letter-spacing: normal !important;
+	text-transform: none !important;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+}
+
+#adminmenu .la-mm-root .la-mm-item > a:hover,
+#adminmenu .la-mm-root .la-mm-item > a:focus {
+	color: #72aee6;
+	background: #1d2327;
+}
+
+/* Active row is distinguished by colour alone — no bold — so weight stays
+   uniform with every other label. */
+#adminmenu .la-mm-root .la-mm-item > a.current {
+	color: #fff;
+}
+
+/* Group (organizational) rows are set apart by colour only, matching the
+   uniform font, weight, size, and Title Case of every other label. */
+#adminmenu .la-mm-root .la-mm-item.la-mm-group > a {
+	color: #a7aaad;
+	font-weight: 400 !important;
+	font-size: 14px !important;
+	letter-spacing: normal !important;
+	text-transform: none !important;
+}
+
+/* Keep carets inside plugin flyout rows; never affect top-level WP anchors. */
+#adminmenu .la-mm-root .la-mm-has-flyout > a::after {
+	content: "\f139"; /* dashicons-arrow-right */
+	font-family: dashicons;
+	flex: 0 0 auto;
+	margin-inline-start: auto;
+	font-size: 16px;
+	line-height: 1;
+	opacity: 0.7;
+}
+
+#adminmenu .la-mm-root .la-mm-flip.la-mm-has-flyout > a::after {
+	content: "\f141"; /* dashicons-arrow-left when flipped */
+}
+
+/* The hub page (no-JS / folded-rail fallback) uses only WordPress core
+   styles — core `.button` chips, native headings, dashicons — so it needs no
+   rules here. See templates/metamenu-hub.php. */

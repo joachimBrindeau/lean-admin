@@ -1,0 +1,180 @@
+/**
+ * Lean Admin — MetaMenu editor screen styles.
+ */
+
+.la-mm-editor-cols {
+	display: flex;
+	gap: 24px;
+	margin-top: 16px;
+	align-items: flex-start;
+}
+
+.la-mm-col {
+	flex: 1 1 0;
+	min-width: 0;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 12px 16px 18px;
+}
+
+.la-mm-tree-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.la-mm-tree-toolbar h2,
+.la-mm-col-palette h2 {
+	margin: 4px 0;
+}
+
+.la-mm-sortable {
+	margin: 8px 0 0;
+	min-height: 40px;
+	padding: 4px;
+	list-style: none;
+}
+
+.la-mm-tree,
+.la-mm-children {
+	border: 1px dashed #c3c4c7;
+	border-radius: 4px;
+	background: #f6f7f7;
+}
+
+.la-mm-children {
+	margin: 8px 0 4px 22px;
+}
+
+.la-mm-palette {
+	border: 1px dashed #dcdcde;
+	border-radius: 4px;
+}
+
+/* Unified node — same chrome for groups and refs at every level. */
+.la-mm-node {
+	display: block;
+	margin: 4px 0;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 3px;
+	padding: 6px 8px;
+}
+
+/* Groups read as containers via a tinted left border. */
+.la-mm-grp {
+	border-left: 3px solid #2271b1;
+}
+
+.la-mm-node-head {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.la-mm-handle {
+	cursor: grab;
+	color: #8c8f94;
+}
+
+.la-mm-label-input {
+	flex: 1 1 auto;
+}
+
+/* A node's nested child list; only indented when it actually holds nodes. */
+.la-mm-node > .la-mm-children:empty {
+	min-height: 0;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* Icon picker — a simple combobox: a scrollable list of rows, each an icon
+   glyph + its text value. Native WP box; no search, no grid. */
+.la-mm-icon-empty .dashicons {
+	opacity: 0.45;
+}
+
+.la-mm-icon-pop {
+	position: absolute;
+	z-index: 100000;
+	width: 220px;
+	max-height: 280px;
+	overflow-y: auto;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+}
+
+.la-mm-icon-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	padding: 5px 10px;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	text-align: left;
+	color: #2c3338;
+}
+
+.la-mm-icon-row:hover,
+.la-mm-icon-row:focus {
+	background: #f0f0f1;
+}
+
+.la-mm-icon-row.is-selected {
+	background: #f0f6fc;
+}
+
+.la-mm-icon-name {
+	font-size: 12px;
+	color: #50575e;
+}
+
+.la-mm-remove {
+	border: 0;
+	background: transparent;
+	color: #b32d2e;
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0 4px;
+}
+
+.la-mm-remove:hover {
+	color: #d63638;
+}
+
+.la-mm-empty {
+	color: #646970;
+	font-style: italic;
+	padding: 8px 4px;
+}
+
+.la-mm-actions {
+	margin-top: 18px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.la-mm-actions .spinner {
+	float: none;
+	margin: 0;
+}
+
+.la-mm-status.is-ok {
+	color: #007017;
+}
+
+.la-mm-status.is-err {
+	color: #b32d2e;
+}
+
+@media screen and (max-width: 782px) {
+	.la-mm-editor-cols {
+		flex-direction: column;
+	}
+}
