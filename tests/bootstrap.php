@@ -18,6 +18,7 @@ define('HOUR_IN_SECONDS', 3600);
 
 /** In-memory option store so get_option/update_option round-trip in tests. */
 $GLOBALS['__lean_admin_test_options'] = [];
+$GLOBALS['__lean_admin_test_taxonomies'] = [];
 
 if (! function_exists('get_option')) {
     function get_option(string $name, $default = false)
@@ -210,6 +211,42 @@ if (! function_exists('current_user_can')) {
     function current_user_can(...$args): bool
     {
         return $GLOBALS['__lean_admin_test_can'] ?? true;
+    }
+}
+
+if (! function_exists('register_taxonomy')) {
+    function register_taxonomy(string $taxonomy, $object_type, array $args = [])
+    {
+        $labels = (object) ($args['labels'] ?? []);
+        $caps = (object) array_merge(
+            ['manage_terms' => 'manage_categories'],
+            $args['capabilities'] ?? []
+        );
+        $object = (object) [
+            'name' => $taxonomy,
+            'object_type' => (array) $object_type,
+            'labels' => $labels,
+            'cap' => $caps,
+        ];
+        $GLOBALS['__lean_admin_test_taxonomies'][$taxonomy] = $object;
+
+        return $object;
+    }
+}
+
+if (! function_exists('get_taxonomy')) {
+    function get_taxonomy(string $taxonomy)
+    {
+        return $GLOBALS['__lean_admin_test_taxonomies'][$taxonomy] ?? false;
+    }
+}
+
+if (! function_exists('unregister_taxonomy')) {
+    function unregister_taxonomy(string $taxonomy): bool
+    {
+        unset($GLOBALS['__lean_admin_test_taxonomies'][$taxonomy]);
+
+        return true;
     }
 }
 

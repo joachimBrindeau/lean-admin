@@ -76,6 +76,15 @@ class MenuRegistry {
 			}
 		}
 
+		// WordPress can append registered-taxonomy submenu rows after late
+		// admin_menu callbacks have already run. Resolve the canonical taxonomy
+		// route from the registered object as a capability-safe fallback so MetaMenu
+		// hubs do not silently omit valid Voxel taxonomies on those screens.
+		$taxonomy = self::resolveTaxonomyRef( $slug );
+		if ( $taxonomy !== null ) {
+			return $taxonomy;
+		}
+
 		$virtual = self::resolveVirtualRef( $slug );
 		if ( $virtual !== null ) {
 			return $virtual;
@@ -84,46 +93,83 @@ class MenuRegistry {
 		return null;
 	}
 
-    /**
-     * Clean a raw `$menu`/`$submenu` title for plain-text display (strip tags,
-     * decode entities like &mdash; -> "—", drop the trailing count bubble).
-     *
-     * Public + static so it is the single label normalizer for consumers of the
-     * WP admin-menu globals.
-     *
-     * @param mixed $raw
-     */
-    public static function cleanLabel( $raw ): string {
-        // Native titles carry markup WP outputs as HTML: count bubbles
-        // ("Plugins <span class=count>0</span>") and entities (Voxel indents
-        // sub-templates with "&mdash; "). Our flyout/hub render text, so strip
-        // tags, decode entities (&mdash; -> "—"), and drop the trailing count.
-        $text = html_entity_decode( wp_strip_all_tags( (string) $raw ), ENT_QUOTES, 'UTF-8' );
-        $text = preg_replace( '/\s+\d+$/', '', $text ) ?? $text;
+	/**
+	 * Clean a raw `$menu`/`$submenu` title for plain-text display (strip tags,
+	 * decode entities like &mdash; -> "—", drop the trailing count bubble).
+	 *
+	 * Public + static so it is the single label normalizer for consumers of the
+	 * WP admin-menu globals.
+	 *
+	 * @param mixed $raw
+	 */
+	public static function cleanLabel( $raw ): string {
+		// Native titles carry markup WP outputs as HTML: count bubbles
+		// ("Plugins <span class=count>0</span>") and entities (Voxel indents
+		// sub-templates with "&mdash; "). Our flyout/hub render text, so strip
+		// tags, decode entities (&mdash; -> "—"), and drop the trailing count.
+		$text = html_entity_decode( wp_strip_all_tags( (string) $raw ), ENT_QUOTES, 'UTF-8' );
+		$text = preg_replace( '/\s+\d+$/', '', $text ) ?? $text;
 
-        return trim( $text );
-    }
+		return trim( $text );
+	}
 
-    /**
-     * A renderable menu row has a label and slug and is not a separator.
-     *
-     * Public so tests and resolvers share the same validity/separator predicate.
-     *
-     * @param mixed $row
-     */
-    public static function isRealMenuRow( $row ): bool {
-        if ( ! is_array( $row ) || empty( $row[0] ) || empty( $row[2] ) ) {
-            return false;
-        }
+	/**
+	 * A renderable menu row has a label and slug and is not a separator.
+	 *
+	 * Public so tests and resolvers share the same validity/separator predicate.
+	 *
+	 * @param mixed $row
+	 */
+	public static function isRealMenuRow( $row ): bool {
+		if ( ! is_array( $row ) || empty( $row[0] ) || empty( $row[2] ) ) {
+			return false;
+		}
 
-        // Separators carry a `wp-menu-separator` class in index 4 and a
-        // `separator*` slug in index 2.
-        if ( isset( $row[4] ) && strpos( (string) $row[4], 'wp-menu-separator' ) !== false ) {
-            return false;
-        }
+		// Separators carry a `wp-menu-separator` class in index 4 and a
+		// `separator*` slug in index 2.
+		if ( isset( $row[4] ) && strpos( (string) $row[4], 'wp-menu-separator' ) !== false ) {
+			return false;
+		}
 
-        return strpos( (string) $row[2], 'separator' ) !== 0;
-    }
+		return strpos( (string) $row[2], 'separator' ) !== 0;
+	}
+
+	/**
+	 * Resolve a canonical edit-tags route from a registered taxonomy.
+	 *
+	 * @return array{label:string,href:string,icon:string,capability:string,children:array<int,array{label:string,href:string}>}|null
+	 */
+	private static function resolveTaxonomyRef( string $slug ): ?array {
+		$parts = parse_url( $slug );
+		if ( ! is_array( $parts ) || ( $parts['path'] ?? '' ) !== 'edit-tags.php' || empty( $parts['query'] ) ) {
+			return null;
+		}
+
+		parse_str( (string) $parts['query'], $query );
+		$taxonomyKey = isset( $query['taxonomy'] ) ? sanitize_key( (string) $query['taxonomy'] ) : '';
+		$taxonomy    = $taxonomyKey !== '' ? get_taxonomy( $taxonomyKey ) : false;
+		if ( $taxonomy === false ) {
+			return null;
+		}
+
+		$postType = isset( $query['post_type'] ) ? sanitize_key( (string) $query['post_type'] ) : '';
+		if ( $postType !== '' && ! in_array( $postType, (array) $taxonomy->object_type, true ) ) {
+			return null;
+		}
+
+		$capability = (string) ( $taxonomy->cap->manage_terms ?? 'manage_categories' );
+		if ( ! current_user_can( $capability ) ) {
+			return null;
+		}
+
+		return [
+			'label'      => (string) ( $taxonomy->labels->menu_name ?? $taxonomy->labels->name ?? $taxonomyKey ),
+			'href'       => UrlHelper::get_admin_url( $slug ),
+			'icon'       => '',
+			'capability' => $capability,
+			'children'   => [],
+		];
+	}
 
 	/**
 	 * Resolve MetaMenu virtual slugs that point at plugin pages not reliably

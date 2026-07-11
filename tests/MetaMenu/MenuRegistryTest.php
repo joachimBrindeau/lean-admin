@@ -32,6 +32,7 @@ final class MenuRegistryTest extends TestCase
 
     protected function tearDown(): void
     {
+        unregister_taxonomy('products_origin');
         unset($GLOBALS['menu'], $GLOBALS['submenu']);
     }
 
@@ -123,6 +124,30 @@ final class MenuRegistryTest extends TestCase
         self::assertSame('Company types', $node['label']);
         self::assertSame('manage_categories', $node['capability']);
         self::assertSame([], $node['children']);
+    }
+
+    public function testResolveRefFallsBackToRegisteredTaxonomyBeforeItsSubmenuExists(): void
+    {
+        register_taxonomy('products_origin', ['products'], [
+            'labels' => ['name' => 'Origins', 'menu_name' => 'Origins'],
+            'capabilities' => ['manage_terms' => 'manage_categories'],
+        ]);
+
+        $node = MenuRegistry::resolveRef('edit-tags.php?taxonomy=products_origin&post_type=products');
+
+        self::assertNotNull($node);
+        self::assertSame('Origins', $node['label']);
+        self::assertSame('manage_categories', $node['capability']);
+        self::assertStringContainsString('taxonomy=products_origin&post_type=products', $node['href']);
+    }
+
+    public function testResolveRefRejectsTaxonomyRouteForUnregisteredPostType(): void
+    {
+        register_taxonomy('products_origin', ['products'], [
+            'capabilities' => ['manage_terms' => 'manage_categories'],
+        ]);
+
+        self::assertNull(MenuRegistry::resolveRef('edit-tags.php?taxonomy=products_origin&post_type=brand'));
     }
 
     public function testResolveRefWithoutSubmenuHasEmptyChildren(): void
