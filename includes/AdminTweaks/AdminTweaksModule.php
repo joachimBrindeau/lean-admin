@@ -27,22 +27,18 @@ class AdminTweaksModule {
 
 	private const LEAN_SEO_TWEAK_OPTION = 'lean_seo_tweak';
 
-    /** @var array<string, array{label:string,description:string,default:bool,callback:callable}> */
-    private array $tweaks;
+    /** @var array<string, array{label:string,description:string,default:bool,callback:callable}>|null */
+    private ?array $tweaks = null;
 
-    public function __construct() {
-        $this->tweaks = self::definitions();
-    }
+	public function register(): void {
+		add_action( 'admin_menu', [ $this, 'registerPage' ], 101 );
+		add_action( 'admin_init', [ $this, 'registerSettings' ] );
 
-    public function register(): void {
-        add_action( 'admin_menu', [ $this, 'registerPage' ], 101 );
-        add_action( 'admin_init', [ $this, 'registerSettings' ] );
-
-        // Admin-only chrome: never attach these cleanup hooks on the frontend.
-        if ( is_admin() ) {
-            $this->applyEnabled();
-        }
-    }
+		// Admin-only chrome: never attach these cleanup hooks on the frontend.
+		if ( is_admin() ) {
+			add_action( 'init', [ $this, 'applyEnabled' ] );
+		}
+	}
 
 	/**
 	 * Enabled map merged over per-tweak defaults.
@@ -55,7 +51,7 @@ class AdminTweaksModule {
 		$saved = $this->migrateLeanSeoAdminTweaks( $saved );
 
 		$map = [];
-		foreach ( $this->tweaks as $key => $tweak ) {
+		foreach ( $this->tweaks() as $key => $tweak ) {
 			$map[ $key ] = isset( $saved[ $key ] ) ? (bool) $saved[ $key ] : $tweak['default'];
 		}
 
@@ -64,7 +60,7 @@ class AdminTweaksModule {
 
 	public function applyEnabled(): void {
 		$enabled = $this->enabledMap();
-		foreach ( $this->tweaks as $key => $tweak ) {
+		foreach ( $this->tweaks() as $key => $tweak ) {
 			if ( ! empty( $enabled[ $key ] ) ) {
 				( $tweak['callback'] )();
 			}
@@ -84,18 +80,18 @@ class AdminTweaksModule {
 
 	public function registerSettings(): void {
 		register_setting(
-            self::GROUP,
-            self::OPTION,
-            [
+			self::GROUP,
+			self::OPTION,
+			[
 				'type'              => 'array',
 				'sanitize_callback' => [ $this, 'sanitize' ],
 				'default'           => [],
 			]
-        );
+		);
 
 		add_settings_section( PluginConstants::ADMIN_TWEAKS_SECTION, '', '__return_false', self::PAGE );
 
-		foreach ( $this->tweaks as $key => $tweak ) {
+		foreach ( $this->tweaks() as $key => $tweak ) {
 			add_settings_field(
 				$key,
 				esc_html( $tweak['label'] ),
@@ -117,7 +113,7 @@ class AdminTweaksModule {
 	public function sanitize( $input ): array {
 		$input = is_array( $input ) ? $input : [];
 		$clean = [];
-		foreach ( array_keys( $this->tweaks ) as $key ) {
+		foreach ( array_keys( $this->tweaks() ) as $key ) {
 			$clean[ $key ] = ! empty( $input[ $key ] );
 		}
 
@@ -159,22 +155,22 @@ class AdminTweaksModule {
 		<?php
 	}
 
-    /**
-     * Tweak catalog. Callbacks are self-contained (only core WP calls) so they
-     * port cleanly and add their own hooks when invoked.
-     *
-     * @return array<string, array{label:string,description:string,default:bool,callback:callable}>
-     */
-    public static function definitions(): array {
-        return [
-            'clean_admin_bar'    => [
-                'label'       => __( 'Clean admin bar', 'lean-admin' ),
-                'description' => __( 'Remove the WordPress logo, comments, and new-content nodes from the admin bar.', 'lean-admin' ),
-                'default'     => false,
-                'callback'    => static function (): void {
-                    add_action(
-                        'wp_before_admin_bar_render',
-                        static function (): void {
+	/**
+	 * Tweak catalog. Callbacks are self-contained (only core WP calls) so they
+	 * port cleanly and add their own hooks when invoked.
+	 *
+	 * @return array<string, array{label:string,description:string,default:bool,callback:callable}>
+	 */
+	public static function definitions(): array {
+		return [
+			'clean_admin_bar'    => [
+				'label'       => __( 'Clean admin bar', 'lean-admin' ),
+				'description' => __( 'Remove the WordPress logo, comments, and new-content nodes from the admin bar.', 'lean-admin' ),
+				'default'     => false,
+				'callback'    => static function (): void {
+					add_action(
+						'wp_before_admin_bar_render',
+						static function (): void {
 							global $wp_admin_bar;
 							if ( ! $wp_admin_bar ) {
 								return;
@@ -183,17 +179,17 @@ class AdminTweaksModule {
 							$wp_admin_bar->remove_node( 'comments' );
 							$wp_admin_bar->remove_node( 'new-content' );
 						}
-                    );
-                },
-            ],
-            'clean_dashboard'    => [
-                'label'       => __( 'Clean dashboard', 'lean-admin' ),
-                'description' => __( 'Remove the default dashboard widgets and the welcome panel.', 'lean-admin' ),
-                'default'     => false,
-                'callback'    => static function (): void {
-                    add_action(
-                        'wp_dashboard_setup',
-                        static function (): void {
+					);
+				},
+			],
+			'clean_dashboard'    => [
+				'label'       => __( 'Clean dashboard', 'lean-admin' ),
+				'description' => __( 'Remove the default dashboard widgets and the welcome panel.', 'lean-admin' ),
+				'default'     => false,
+				'callback'    => static function (): void {
+					add_action(
+						'wp_dashboard_setup',
+						static function (): void {
 							remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 							remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 							remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
@@ -201,41 +197,52 @@ class AdminTweaksModule {
 							remove_meta_box( 'dashboard_site_health', 'dashboard', 'normal' );
 							remove_action( 'welcome_panel', 'wp_welcome_panel' );
 						}
-                    );
-                },
-            ],
-            'clean_admin_footer' => [
-                'label'       => __( 'Clean admin footer', 'lean-admin' ),
-                'description' => __( 'Hide the WordPress version and the “Thank you for creating with WordPress” footer text.', 'lean-admin' ),
-                'default'     => false,
-                'callback'    => static function (): void {
-                    add_filter( 'update_footer', '__return_empty_string', 11 );
-                    add_filter( 'admin_footer_text', '__return_empty_string', 11 );
-                },
-            ],
-            'hide_comments_ui'   => [
-                'label'       => __( 'Hide comments UI', 'lean-admin' ),
-                'description' => __( 'Remove the Comments menu and comment metaboxes from admin screens.', 'lean-admin' ),
-                'default'     => false,
-                'callback'    => static function (): void {
-                    add_action(
-                        'admin_menu',
-                        static function (): void {
+					);
+				},
+			],
+			'clean_admin_footer' => [
+				'label'       => __( 'Clean admin footer', 'lean-admin' ),
+				'description' => __( 'Hide the WordPress version and the “Thank you for creating with WordPress” footer text.', 'lean-admin' ),
+				'default'     => false,
+				'callback'    => static function (): void {
+					add_filter( 'update_footer', '__return_empty_string', 11 );
+					add_filter( 'admin_footer_text', '__return_empty_string', 11 );
+				},
+			],
+			'hide_comments_ui'   => [
+				'label'       => __( 'Hide comments UI', 'lean-admin' ),
+				'description' => __( 'Remove the Comments menu and comment metaboxes from admin screens.', 'lean-admin' ),
+				'default'     => false,
+				'callback'    => static function (): void {
+					add_action(
+						'admin_menu',
+						static function (): void {
 							remove_menu_page( 'edit-comments.php' );
 						}
-                    );
-                    add_action(
-                        'admin_init',
-                        static function (): void {
+					);
+					add_action(
+						'admin_init',
+						static function (): void {
 							foreach ( get_post_types() as $post_type ) {
 								remove_meta_box( 'commentsdiv', $post_type, 'normal' );
 								remove_meta_box( 'commentstatusdiv', $post_type, 'normal' );
 							}
 						}
-                    );
-                },
-            ],
-        ];
+					);
+				},
+			],
+		];
+	}
+
+    /**
+     * Lazy tweak catalog. definitions() calls __(), so it must not run before
+     * the init action (WP 6.7 _load_textdomain_just_in_time notice); the
+     * module is constructed at plugins_loaded.
+     *
+     * @return array<string, array{label:string,description:string,default:bool,callback:callable}>
+     */
+    private function tweaks(): array {
+        return $this->tweaks ??= self::definitions();
     }
 
 	/**

@@ -17,12 +17,12 @@ msgstr ""
 #. Plugin Name of the plugin
 #: lean-admin.php
 msgid "Lean Admin"
-msgstr "Admin Lean"
+msgstr "Lean Admin"
 
 #. Description of the plugin
 #: lean-admin.php
 msgid "Admin menu grouping and lightweight admin chrome tweaks."
-msgstr "Regroupement du menu d'administration et modifications légères de l'apparence administrative."
+msgstr "Regroupement du menu d'administration et ajustements légers de l'interface d'administration."
 
 #. Author of the plugin
 #: lean-admin.php
@@ -33,7 +33,7 @@ msgstr "Joachim Brindeau"
 #: includes/AdminTweaks/AdminTweaksModule.php:78
 #: includes/AdminTweaks/AdminTweaksModule.php:149
 msgid "Admin Tweaks"
-msgstr "Améliorations Administratives"
+msgstr "Ajustements de l'administration"
 
 #: includes/AdminTweaks/AdminTweaksModule.php:145
 #: includes/MetaMenu/MetaMenuModule.php:55
@@ -43,7 +43,7 @@ msgstr "Vous n'avez pas la permission d'accéder à cette page."
 
 #: includes/AdminTweaks/AdminTweaksModule.php:150
 msgid "Opt-in cleanups for the WordPress admin chrome."
-msgstr "Nettoyages optionnels de l'apparence administrative WordPress."
+msgstr "Nettoyages facultatifs de l'interface d'administration WordPress."
 
 #: includes/AjaxBase.php:94
 msgid "Security check failed. Please refresh the page and try again."
@@ -60,11 +60,11 @@ msgstr "Modifier le type de publication"
 #: includes/MetaMenu/MetaMenuModule.php:45
 #: templates/metamenu-editor.php:22
 msgid "Admin Menu Groups"
-msgstr "Groupes du Menu d'Administration"
+msgstr "Groupes de menus d'administration"
 
 #: includes/MetaMenu/MetaMenuModule.php:46
 msgid "Admin Menus"
-msgstr "Menus Administratifs"
+msgstr "Menus d'administration"
 
 #: includes/MetaMenu/MetaMenuModule.php:129
 msgid "No icon"
@@ -144,11 +144,11 @@ msgstr "Pages regroupées sous ce menu."
 
 #: includes/AdminTweaks/AdminTweaksModule.php:171
 msgid "Clean admin bar"
-msgstr "Barre d’admin épurée"
+msgstr "Barre d’administration épurée"
 
 #: includes/AdminTweaks/AdminTweaksModule.php:172
 msgid "Remove the WordPress logo, comments, and new-content nodes from the admin bar."
-msgstr "Supprimer du barre d’admin le logo WordPress, les commentaires et les nœuds de nouveau contenu."
+msgstr "Retirer de la barre d’administration le logo WordPress, les commentaires et le bouton de création de contenu."
 
 #: includes/AdminTweaks/AdminTweaksModule.php:190
 msgid "Clean dashboard"
@@ -160,7 +160,7 @@ msgstr "Supprimer les widgets par défaut du tableau de bord et le panneau de bi
 
 #: includes/AdminTweaks/AdminTweaksModule.php:208
 msgid "Clean admin footer"
-msgstr "Pied de page d’admin épuré"
+msgstr "Pied de page d’administration épuré"
 
 #: includes/AdminTweaks/AdminTweaksModule.php:209
 msgid "Hide the WordPress version and the “Thank you for creating with WordPress” footer text."
@@ -172,4 +172,4 @@ msgstr "Masquer l’interface des commentaires"
 
 #: includes/AdminTweaks/AdminTweaksModule.php:218
 msgid "Remove the Comments menu and comment metaboxes from admin screens."
-msgstr "Supprimer du écrans d’admin le menu Commentaires et les metaboxes de commentaires."
+msgstr "Retirer des écrans d’administration le menu Commentaires et les boîtes de commentaires."
