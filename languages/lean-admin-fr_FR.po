@@ -141,3 +141,35 @@ msgstr "Enregistrer le menu"
 #: templates/metamenu-hub.php:96
 msgid "Pages grouped under this menu."
 msgstr "Pages regroupées sous ce menu."
+
+#: includes/AdminTweaks/AdminTweaksModule.php:171
+msgid "Clean admin bar"
+msgstr "Barre d’admin épurée"
+
+#: includes/AdminTweaks/AdminTweaksModule.php:172
+msgid "Remove the WordPress logo, comments, and new-content nodes from the admin bar."
+msgstr "Supprimer du barre d’admin le logo WordPress, les commentaires et les nœuds de nouveau contenu."
+
+#: includes/AdminTweaks/AdminTweaksModule.php:190
+msgid "Clean dashboard"
+msgstr "Tableau de bord épuré"
+
+#: includes/AdminTweaks/AdminTweaksModule.php:191
+msgid "Remove the default dashboard widgets and the welcome panel."
+msgstr "Supprimer les widgets par défaut du tableau de bord et le panneau de bienvenue."
+
+#: includes/AdminTweaks/AdminTweaksModule.php:208
+msgid "Clean admin footer"
+msgstr "Pied de page d’admin épuré"
+
+#: includes/AdminTweaks/AdminTweaksModule.php:209
+msgid "Hide the WordPress version and the “Thank you for creating with WordPress” footer text."
+msgstr "Masquer la version WordPress et le texte de pied de page « Thank you for creating with WordPress »."
+
+#: includes/AdminTweaks/AdminTweaksModule.php:217
+msgid "Hide comments UI"
+msgstr "Masquer l’interface des commentaires"
+
+#: includes/AdminTweaks/AdminTweaksModule.php:218
+msgid "Remove the Comments menu and comment metaboxes from admin screens."
+msgstr "Supprimer du écrans d’admin le menu Commentaires et les metaboxes de commentaires."

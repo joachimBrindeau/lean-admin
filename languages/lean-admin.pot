@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-11T06:46:33+00:00\n"
+"POT-Creation-Date: 2026-07-11T07:23:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-admin\n"
@@ -43,6 +43,38 @@ msgstr ""
 
 #: includes/AdminTweaks/AdminTweaksModule.php:150
 msgid "Opt-in cleanups for the WordPress admin chrome."
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:171
+msgid "Clean admin bar"
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:172
+msgid "Remove the WordPress logo, comments, and new-content nodes from the admin bar."
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:190
+msgid "Clean dashboard"
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:191
+msgid "Remove the default dashboard widgets and the welcome panel."
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:208
+msgid "Clean admin footer"
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:209
+msgid "Hide the WordPress version and the “Thank you for creating with WordPress” footer text."
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:217
+msgid "Hide comments UI"
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:218
+msgid "Remove the Comments menu and comment metaboxes from admin screens."
 msgstr ""
 
 #: includes/AjaxBase.php:94
