@@ -1,0 +1,158 @@
+# Copyright (C) 2026 Joachim Brindeau
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Admin 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/lean-admin\n"
+"POT-Creation-Date: 2026-07-11T06:21:12+00:00\n"
+"PO-Revision-Date: 2026-07-11T06:21:12+00:00\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: lean-admin\n"
+"X-Generator: WP-CLI 2.12.0\n"
+
+#. Plugin Name of the plugin
+#: lean-admin.php
+msgid "Lean Admin"
+msgstr "Admin Lean"
+
+#. Description of the plugin
+#: lean-admin.php
+msgid "Admin menu grouping and lightweight admin chrome tweaks."
+msgstr ""
+"Regroupement du menu d'administration et modifications légères de "
+"l'apparence administrative."
+
+#. Author of the plugin
+#: lean-admin.php
+msgid "Joachim Brindeau"
+msgstr "Joachim Brindeau"
+
+#: includes/AdminTweaks/AdminTweaksModule.php:77
+#: includes/AdminTweaks/AdminTweaksModule.php:78
+#: includes/AdminTweaks/AdminTweaksModule.php:149
+msgid "Admin Tweaks"
+msgstr "Améliorations Administratives"
+
+#: includes/AdminTweaks/AdminTweaksModule.php:145
+#: includes/MetaMenu/MetaMenuModule.php:55 templates/metamenu-editor.php:18
+msgid "You do not have permission to access this page."
+msgstr "Vous n'avez pas la permission d'accéder à cette page."
+
+#: includes/AdminTweaks/AdminTweaksModule.php:150
+msgid "Opt-in cleanups for the WordPress admin chrome."
+msgstr "Nettoyages optionnels de l'apparence administrative WordPress."
+
+#: includes/AjaxBase.php:94
+msgid "Security check failed. Please refresh the page and try again."
+msgstr ""
+"Échec de la vérification de sécurité. Veuillez actualiser la page et "
+"réessayer."
+
+#: includes/MetaMenu/MenuRegistry.php:149
+msgid "EMCP Tools"
+msgstr "Outils EMCP"
+
+#: includes/MetaMenu/MenuRegistry.php:167
+msgid "Edit post type"
+msgstr "Modifier le type de publication"
+
+#: includes/MetaMenu/MetaMenuModule.php:45 templates/metamenu-editor.php:22
+msgid "Admin Menu Groups"
+msgstr "Groupes du Menu d'Administration"
+
+#: includes/MetaMenu/MetaMenuModule.php:46
+msgid "Admin Menus"
+msgstr "Menus Administratifs"
+
+#: includes/MetaMenu/MetaMenuModule.php:129
+msgid "No icon"
+msgstr "Aucune icône"
+
+#: includes/MetaMenu/MetaMenuModule.php:130
+msgid "Choose icon"
+msgstr "Choisir une icône"
+
+#: includes/MetaMenu/MetaMenuModule.php:131
+msgid "Label"
+msgstr "Libellé"
+
+#: includes/MetaMenu/MetaMenuModule.php:132
+msgid "Group name"
+msgstr "Nom du groupe"
+
+#: includes/MetaMenu/MetaMenuModule.php:133
+msgid "Remove from group"
+msgstr "Supprimer du groupe"
+
+#: includes/MetaMenu/MetaMenuModule.php:134
+msgid "Delete group"
+msgstr "Supprimer le groupe"
+
+#: includes/MetaMenu/MetaMenuModule.php:135
+msgid "Give every group a name before saving."
+msgstr "Donnez un nom à chaque groupe avant de sauvegarder."
+
+#: includes/MetaMenu/MetaMenuModule.php:136
+msgid "Saved. Reload to see the updated sidebar."
+msgstr "Sauvegardé. Actualisez pour voir la barre latérale mise à jour."
+
+#: includes/MetaMenu/MetaMenuModule.php:137
+msgid "Save failed."
+msgstr "Échec de la sauvegarde."
+
+#: includes/MetaMenu/MetaMenuModule.php:138
+msgid "Save failed (network)."
+msgstr "Enregistrement échoué (réseau)."
+
+#: templates/metamenu-editor.php:24
+msgid ""
+"Drag menu entries into groups to build nested flyout menus. Reorder freely "
+"across any depth."
+msgstr ""
+"Glissez les entrées du menu dans des groupes pour créer des menus déroulants"
+" imbriqués. Réorganisez librement à n’importe quel niveau."
+
+#: templates/metamenu-editor.php:29
+msgid ""
+"The menu editor requires JavaScript. Your grouped menus still work without "
+"it."
+msgstr ""
+"L’éditeur de menu nécessite JavaScript. Vos menus regroupés fonctionnent "
+"sans lui."
+
+#: templates/metamenu-editor.php:35
+msgid "Available entries"
+msgstr "Entrées disponibles"
+
+#: templates/metamenu-editor.php:36
+msgid "Entries not placed in a group stay where WordPress puts them."
+msgstr ""
+"Les entrées non placées dans un groupe restent là où WordPress les "
+"positionne."
+
+#: templates/metamenu-editor.php:42
+msgid "Your menu"
+msgstr "Votre menu"
+
+#: templates/metamenu-editor.php:44
+msgid "Add group"
+msgstr "Ajouter un groupe"
+
+#: templates/metamenu-editor.php:49
+msgid "Drag entries here, or click “Add group” to start."
+msgstr ""
+"Glissez des entrées ici ou cliquez sur « Ajouter un groupe » pour commencer."
+
+#: templates/metamenu-editor.php:56
+msgid "Save menu"
+msgstr "Enregistrer le menu"
+
+#: templates/metamenu-hub.php:96
+msgid "Pages grouped under this menu."
+msgstr "Pages regroupées sous ce menu."

@@ -14,6 +14,7 @@
 	var items = Array.isArray(cfg.items) ? cfg.items : [];
 	var tree = Array.isArray(cfg.tree) ? cfg.tree : [];
 	var ajax = cfg.ajax || {};
+	var i18n = cfg.i18n || {};
 
 	var paletteEl = document.getElementById('la-mm-palette');
 	var treeEl = document.getElementById('la-mm-tree');
@@ -95,7 +96,7 @@
 			return b;
 		}
 
-		pop.appendChild(row('', 'No icon'));
+		pop.appendChild(row('', i18n.noIcon));
 		DASHICONS.forEach(function (d) { pop.appendChild(row(d, d)); });
 		document.body.appendChild(pop);
 
@@ -115,7 +116,7 @@
 	function iconChip(li, icon) {
 		var btn = el('button', 'button la-mm-icon-btn');
 		btn.type = 'button';
-		btn.title = 'Choose icon';
+		btn.title = i18n.chooseIcon;
 		btn.appendChild(el('span', 'dashicons ' + (icon || 'dashicons-menu-alt')));
 		if (!icon) { btn.classList.add('la-mm-icon-empty'); }
 		btn.addEventListener('click', function (e) {
@@ -159,12 +160,12 @@
 		var labelInput = el('input', 'la-mm-label-input');
 		labelInput.type = 'text';
 		labelInput.value = spec.label != null ? spec.label : (spec.title || spec.slug || '');
-		labelInput.placeholder = isRef ? 'Label' : 'Group name';
+		labelInput.placeholder = isRef ? i18n.label : i18n.groupName;
 		head.appendChild(labelInput);
 
 		var remove = el('button', 'la-mm-remove button-link', '×');
 		remove.type = 'button';
-		remove.title = isRef ? 'Remove from group' : 'Delete group';
+		remove.title = isRef ? i18n.removeFromGroup : i18n.deleteGroup;
 		remove.addEventListener('click', function () { removeNode(li); });
 		head.appendChild(remove);
 
@@ -325,7 +326,7 @@
 		if (!btn) { return; }
 
 		if (firstEmptyGroupLabel()) {
-			status('Give every group a name before saving.', false);
+			status(i18n.nameRequired, false);
 			return;
 		}
 
@@ -346,13 +347,13 @@
 			.then(function (r) { return r.json(); })
 			.then(function (json) {
 				if (json && json.success) {
-					status('Saved. Reload to see the updated sidebar.', true);
+					status(i18n.saved, true);
 				} else {
 					var msg = (json && json.data && json.data.message) || (json && json.message);
-					status(msg || 'Save failed.', false);
+					status(msg || i18n.saveFailed, false);
 				}
 			})
-			.catch(function () { status('Save failed (network).', false); })
+			.catch(function () { status(i18n.networkFailed, false); })
 			.finally(function () {
 				btn.disabled = false;
 				if (spinner) { spinner.classList.remove('is-active'); }

@@ -9,6 +9,7 @@
  * Requires PHP: 8.1
  * Requires at least: 6.0
  * Text Domain: lean-admin
+ * Domain Path: /languages
  */
 
 declare(strict_types=1);
@@ -20,6 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'LEAN_ADMIN_PLUGIN_FILE' ) ) {
 	define( 'LEAN_ADMIN_PLUGIN_FILE', __FILE__ );
 }
+
+add_action(
+	'init',
+	static function (): void {
+		$locale = apply_filters( 'plugin_locale', determine_locale(), 'lean-admin' );
+		load_textdomain( 'lean-admin', __DIR__ . '/languages/lean-admin-' . $locale . '.mo' );
+	}
+);
 
 require_once __DIR__ . '/includes/bootstrap.php';
 

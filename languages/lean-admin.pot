@@ -1,0 +1,143 @@
+# Copyright (C) 2026 Joachim Brindeau
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Lean Admin 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/lean-admin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-11T06:21:12+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: lean-admin\n"
+
+#. Plugin Name of the plugin
+#: lean-admin.php
+msgid "Lean Admin"
+msgstr ""
+
+#. Description of the plugin
+#: lean-admin.php
+msgid "Admin menu grouping and lightweight admin chrome tweaks."
+msgstr ""
+
+#. Author of the plugin
+#: lean-admin.php
+msgid "Joachim Brindeau"
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:77
+#: includes/AdminTweaks/AdminTweaksModule.php:78
+#: includes/AdminTweaks/AdminTweaksModule.php:149
+msgid "Admin Tweaks"
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:145
+#: includes/MetaMenu/MetaMenuModule.php:55
+#: templates/metamenu-editor.php:18
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:150
+msgid "Opt-in cleanups for the WordPress admin chrome."
+msgstr ""
+
+#: includes/AjaxBase.php:94
+msgid "Security check failed. Please refresh the page and try again."
+msgstr ""
+
+#: includes/MetaMenu/MenuRegistry.php:149
+msgid "EMCP Tools"
+msgstr ""
+
+#: includes/MetaMenu/MenuRegistry.php:167
+msgid "Edit post type"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:45
+#: templates/metamenu-editor.php:22
+msgid "Admin Menu Groups"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:46
+msgid "Admin Menus"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:129
+msgid "No icon"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:130
+msgid "Choose icon"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:131
+msgid "Label"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:132
+msgid "Group name"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:133
+msgid "Remove from group"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:134
+msgid "Delete group"
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:135
+msgid "Give every group a name before saving."
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:136
+msgid "Saved. Reload to see the updated sidebar."
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:137
+msgid "Save failed."
+msgstr ""
+
+#: includes/MetaMenu/MetaMenuModule.php:138
+msgid "Save failed (network)."
+msgstr ""
+
+#: templates/metamenu-editor.php:24
+msgid "Drag menu entries into groups to build nested flyout menus. Reorder freely across any depth."
+msgstr ""
+
+#: templates/metamenu-editor.php:29
+msgid "The menu editor requires JavaScript. Your grouped menus still work without it."
+msgstr ""
+
+#: templates/metamenu-editor.php:35
+msgid "Available entries"
+msgstr ""
+
+#: templates/metamenu-editor.php:36
+msgid "Entries not placed in a group stay where WordPress puts them."
+msgstr ""
+
+#: templates/metamenu-editor.php:42
+msgid "Your menu"
+msgstr ""
+
+#: templates/metamenu-editor.php:44
+msgid "Add group"
+msgstr ""
+
+#: templates/metamenu-editor.php:49
+msgid "Drag entries here, or click “Add group” to start."
+msgstr ""
+
+#: templates/metamenu-editor.php:56
+msgid "Save menu"
+msgstr ""
+
+#: templates/metamenu-hub.php:96
+msgid "Pages grouped under this menu."
+msgstr ""

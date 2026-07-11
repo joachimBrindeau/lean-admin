@@ -125,6 +125,18 @@ class MetaMenuModule {
 				'items' => MenuRegistry::getAvailableItems(),
 				'tree'  => MetaMenuConfig::load(),
 				'ajax'  => $this->ajax->getJsConfig(),
+				'i18n'  => [
+					'noIcon'          => __( 'No icon', 'lean-admin' ),
+					'chooseIcon'      => __( 'Choose icon', 'lean-admin' ),
+					'label'           => __( 'Label', 'lean-admin' ),
+					'groupName'       => __( 'Group name', 'lean-admin' ),
+					'removeFromGroup' => __( 'Remove from group', 'lean-admin' ),
+					'deleteGroup'     => __( 'Delete group', 'lean-admin' ),
+					'nameRequired'    => __( 'Give every group a name before saving.', 'lean-admin' ),
+					'saved'           => __( 'Saved. Reload to see the updated sidebar.', 'lean-admin' ),
+					'saveFailed'      => __( 'Save failed.', 'lean-admin' ),
+					'networkFailed'   => __( 'Save failed (network).', 'lean-admin' ),
+				],
 			]
         );
     }
