@@ -142,6 +142,22 @@ final class MenuRegistryTest extends TestCase
         self::assertSame('http://example.test/wp-admin/edit.php?post_type=services&page=edit-post-type-services', $node['href']);
     }
 
+    public function testResolveRefKeepsVoxelSubmenuParentRoute(): void
+    {
+        $GLOBALS['menu'][] = ['Videos', 'edit_posts', 'edit.php?post_type=video', '', 'menu-top', 'menu-video', ''];
+        $GLOBALS['submenu']['edit.php?post_type=video'] = [
+            ['Edit post type', 'manage_options', 'edit-post-type-video'],
+        ];
+
+        $node = MenuRegistry::resolveRef('edit-post-type-video');
+
+        self::assertNotNull($node);
+        self::assertSame(
+            'http://example.test/wp-admin/edit.php?post_type=video&page=edit-post-type-video',
+            $node['href']
+        );
+    }
+
     public function testResolveRefSupportsEmcpToolsVirtualSlug(): void
     {
         $node = MenuRegistry::resolveRef('emcp-tools');

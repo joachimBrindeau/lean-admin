@@ -204,14 +204,20 @@ class MenuRegistry {
 	 * @return array{label:string,href:string,icon:string,capability:string,children:array<int,array{label:string,href:string}>}|null
 	 */
 	private static function resolveSubmenuRef( string $slug, array $submenu ): ?array {
-		$item = self::findSubmenuItem( $slug, $submenu );
-		if ( $item === null ) {
+		$match = self::findSubmenuItem( $slug, $submenu );
+		if ( $match === null ) {
 			return null;
 		}
+		$item       = $match['item'];
+		$parentSlug = $match['parent'];
 
 		return [
 			'label'      => self::cleanLabel( $item[0] ),
-			'href'       => UrlHelper::get_admin_url( $slug ),
+			// Voxel builder rows use a bare `edit-post-type-*` child slug
+			// whose real route depends on its CPT parent query. Retain the
+			// parent discovered during the submenu scan instead of flattening
+			// it to the invalid `admin.php?page=*` generic plugin-page shape.
+			'href'       => UrlHelper::get_admin_submenu_url( $parentSlug, $slug ),
 			'icon'       => '',
 			'capability' => isset( $item[1] ) ? (string) $item[1] : 'read',
 			'children'   => [],
@@ -220,16 +226,19 @@ class MenuRegistry {
 
 	/**
 	 * @param array<string, array<int, array<int, string>>> $submenu
-	 * @return array<int, mixed>|null
+	 * @return array{parent:string,item:array<int,mixed>}|null
 	 */
 	private static function findSubmenuItem( string $slug, array $submenu ): ?array {
-		foreach ( $submenu as $items ) {
+		foreach ( $submenu as $parentSlug => $items ) {
 			if ( ! is_array( $items ) ) {
 				continue;
 			}
 			foreach ( $items as $item ) {
 				if ( is_array( $item ) && (string) ( $item[2] ?? '' ) === $slug && ! empty( $item[0] ) ) {
-					return $item;
+					return [
+						'parent' => (string) $parentSlug,
+						'item'   => $item,
+					];
 				}
 			}
 		}
