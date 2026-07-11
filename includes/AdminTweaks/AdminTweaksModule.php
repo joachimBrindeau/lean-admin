@@ -168,8 +168,8 @@ class AdminTweaksModule {
     public static function definitions(): array {
         return [
             'clean_admin_bar'    => [
-                'label'       => 'Clean admin bar',
-                'description' => 'Remove the WordPress logo, comments, and new-content nodes from the admin bar.',
+                'label'       => __( 'Clean admin bar', 'lean-admin' ),
+                'description' => __( 'Remove the WordPress logo, comments, and new-content nodes from the admin bar.', 'lean-admin' ),
                 'default'     => false,
                 'callback'    => static function (): void {
                     add_action(
@@ -187,8 +187,8 @@ class AdminTweaksModule {
                 },
             ],
             'clean_dashboard'    => [
-                'label'       => 'Clean dashboard',
-                'description' => 'Remove the default dashboard widgets and the welcome panel.',
+                'label'       => __( 'Clean dashboard', 'lean-admin' ),
+                'description' => __( 'Remove the default dashboard widgets and the welcome panel.', 'lean-admin' ),
                 'default'     => false,
                 'callback'    => static function (): void {
                     add_action(
@@ -205,8 +205,8 @@ class AdminTweaksModule {
                 },
             ],
             'clean_admin_footer' => [
-                'label'       => 'Clean admin footer',
-                'description' => 'Hide the WordPress version and the “Thank you for creating with WordPress” footer text.',
+                'label'       => __( 'Clean admin footer', 'lean-admin' ),
+                'description' => __( 'Hide the WordPress version and the “Thank you for creating with WordPress” footer text.', 'lean-admin' ),
                 'default'     => false,
                 'callback'    => static function (): void {
                     add_filter( 'update_footer', '__return_empty_string', 11 );
@@ -214,8 +214,8 @@ class AdminTweaksModule {
                 },
             ],
             'hide_comments_ui'   => [
-                'label'       => 'Hide comments UI',
-                'description' => 'Remove the Comments menu and comment metaboxes from admin screens.',
+                'label'       => __( 'Hide comments UI', 'lean-admin' ),
+                'description' => __( 'Remove the Comments menu and comment metaboxes from admin screens.', 'lean-admin' ),
                 'default'     => false,
                 'callback'    => static function (): void {
                     add_action(
