@@ -80,6 +80,32 @@ final class MenuTreeBuilderTest extends TestCase
         self::assertSame('edit.php', $tree[0]['children'][0]['slug']);
     }
 
+    public function testReconcileDropsDeadRefsAndEmptyGroups(): void
+    {
+        $config = [[
+            'type' => 'group', 'id' => 'g', 'label' => 'G', 'children' => [
+                ['type' => 'ref', 'slug' => 'admin.php?page=ghost'],
+            ],
+        ]];
+
+        self::assertSame([], MenuTreeBuilder::reconcileConfig($config));
+    }
+
+    public function testReconcilePromotesValidChildrenOfMissingParent(): void
+    {
+        $config = [[
+            'type' => 'ref', 'slug' => 'admin.php?page=missing-parent', 'children' => [
+                ['type' => 'ref', 'slug' => 'edit.php'],
+                ['type' => 'ref', 'slug' => 'admin.php?page=ghost'],
+            ],
+        ]];
+
+        self::assertSame(
+            [['type' => 'ref', 'slug' => 'edit.php']],
+            MenuTreeBuilder::reconcileConfig($config)
+        );
+    }
+
     public function testTopLevelGroupsGetPositions(): void
     {
         $tree = MenuTreeBuilder::buildTree($this->postTypesConfig());

@@ -72,6 +72,13 @@ class MetaMenuReorganizer {
             return;
         }
 
+        if ( current_user_can( 'manage_options' ) ) {
+            $reconciled = MenuTreeBuilder::reconcileConfig( $config );
+            if ( $reconciled !== $config && MetaMenuConfig::save( $reconciled ) ) {
+                $config = $reconciled;
+            }
+        }
+
         // Resolve the structural flyout tree and the active-state from the live,
         // cap-filtered menu. No snapshot needed: nothing is removed, so the
         // editor palette reads the same live `$menu` later.

@@ -67,6 +67,27 @@ class MenuTreeBuilder {
     }
 
     /**
+     * Remove dead refs and promote valid children when their parent vanished.
+     *
+     * Unconfigured live menu entries need no stored node: WordPress keeps them
+     * at the native root automatically. This transform only repairs configured
+     * nodes, so a newly registered entry can never disappear because Lean Admin
+     * failed to infer a parent.
+     *
+     * @param array<int, array<string, mixed>> $config
+     * @return array<int, array<string, mixed>>
+     */
+    public static function reconcileConfig( array $config ): array {
+        $out = [];
+
+        foreach ( $config as $node ) {
+            array_push( $out, ...self::reconcileNode( $node ) );
+        }
+
+        return $out;
+    }
+
+    /**
      * Flat list of every hide-node slug in the config tree.
      *
      * @param array<int, array<string, mixed>> $config Normalized config tree
@@ -310,6 +331,45 @@ class MenuTreeBuilder {
         );
 
         return $node;
+    }
+
+    /**
+     * @param array<string, mixed> $node
+     * @return array<int, array<string, mixed>>
+     */
+    private static function reconcileNode( array $node ): array {
+        return match ( $node['type'] ?? null ) {
+            'group' => self::reconcileGroup( $node ),
+            'ref'   => self::reconcileRef( $node ),
+            'hide'  => MenuRegistry::resolveRef( (string) ( $node['slug'] ?? '' ) ) === null ? [] : [ $node ],
+            default => [],
+        };
+    }
+
+    /**
+     * @param array<string, mixed> $node
+     * @return array<int, array<string, mixed>>
+     */
+    private static function reconcileGroup( array $node ): array {
+        $node['children'] = self::reconcileConfig( is_array( $node['children'] ?? null ) ? $node['children'] : [] );
+
+        return $node['children'] === [] ? [] : [ $node ];
+    }
+
+    /**
+     * @param array<string, mixed> $node
+     * @return array<int, array<string, mixed>>
+     */
+    private static function reconcileRef( array $node ): array {
+        $children = self::reconcileConfig( is_array( $node['children'] ?? null ) ? $node['children'] : [] );
+        if ( MenuRegistry::resolveRef( (string) ( $node['slug'] ?? '' ) ) === null ) {
+            return $children;
+        }
+        if ( isset( $node['children'] ) ) {
+            $node['children'] = $children;
+        }
+
+        return [ $node ];
     }
 
     /**
