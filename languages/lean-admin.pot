@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-11T07:28:00+00:00\n"
+"POT-Creation-Date: 2026-07-13T06:14:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: lean-admin\n"
@@ -29,63 +29,71 @@ msgstr ""
 msgid "Joachim Brindeau"
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:77
-#: includes/AdminTweaks/AdminTweaksModule.php:78
-#: includes/AdminTweaks/AdminTweaksModule.php:149
+#: includes/AdminTweaks/AdminTweaksModule.php:73
+#: includes/AdminTweaks/AdminTweaksModule.php:74
+#: includes/AdminTweaks/AdminTweaksModule.php:145
 msgid "Admin Tweaks"
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:145
+#: includes/AdminTweaks/AdminTweaksModule.php:141
 #: includes/MetaMenu/MetaMenuModule.php:55
 #: templates/metamenu-editor.php:18
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:150
+#: includes/AdminTweaks/AdminTweaksModule.php:146
 msgid "Opt-in cleanups for the WordPress admin chrome."
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:171
+#: includes/AdminTweaks/AdminTweaksModule.php:167
 msgid "Clean admin bar"
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:172
+#: includes/AdminTweaks/AdminTweaksModule.php:168
 msgid "Remove the WordPress logo, comments, and new-content nodes from the admin bar."
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:190
+#: includes/AdminTweaks/AdminTweaksModule.php:186
 msgid "Clean dashboard"
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:191
+#: includes/AdminTweaks/AdminTweaksModule.php:187
 msgid "Remove the default dashboard widgets and the welcome panel."
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:208
+#: includes/AdminTweaks/AdminTweaksModule.php:204
 msgid "Clean admin footer"
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:209
+#: includes/AdminTweaks/AdminTweaksModule.php:205
 msgid "Hide the WordPress version and the “Thank you for creating with WordPress” footer text."
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:217
+#: includes/AdminTweaks/AdminTweaksModule.php:213
 msgid "Hide comments UI"
 msgstr ""
 
-#: includes/AdminTweaks/AdminTweaksModule.php:218
+#: includes/AdminTweaks/AdminTweaksModule.php:214
 msgid "Remove the Comments menu and comment metaboxes from admin screens."
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:235
+msgid "Quiet LiteSpeed purge notices"
+msgstr ""
+
+#: includes/AdminTweaks/AdminTweaksModule.php:236
+msgid "Suppress the “Purge url …” and “Purged all caches successfully.” admin notices from LiteSpeed Cache."
 msgstr ""
 
 #: includes/AjaxBase.php:94
 msgid "Security check failed. Please refresh the page and try again."
 msgstr ""
 
-#: includes/MetaMenu/MenuRegistry.php:149
+#: includes/MetaMenu/MenuRegistry.php:195
 msgid "EMCP Tools"
 msgstr ""
 
-#: includes/MetaMenu/MenuRegistry.php:167
+#: includes/MetaMenu/MenuRegistry.php:213
 msgid "Edit post type"
 msgstr ""
 

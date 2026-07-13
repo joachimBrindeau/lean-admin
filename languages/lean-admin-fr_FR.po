@@ -29,19 +29,19 @@ msgstr "Regroupement du menu d'administration et ajustements légers de l'interf
 msgid "Joachim Brindeau"
 msgstr "Joachim Brindeau"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:77
-#: includes/AdminTweaks/AdminTweaksModule.php:78
-#: includes/AdminTweaks/AdminTweaksModule.php:149
+#: includes/AdminTweaks/AdminTweaksModule.php:73
+#: includes/AdminTweaks/AdminTweaksModule.php:74
+#: includes/AdminTweaks/AdminTweaksModule.php:145
 msgid "Admin Tweaks"
 msgstr "Ajustements de l'administration"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:145
+#: includes/AdminTweaks/AdminTweaksModule.php:141
 #: includes/MetaMenu/MetaMenuModule.php:55
 #: templates/metamenu-editor.php:18
 msgid "You do not have permission to access this page."
 msgstr "Vous n'avez pas la permission d'accéder à cette page."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:150
+#: includes/AdminTweaks/AdminTweaksModule.php:146
 msgid "Opt-in cleanups for the WordPress admin chrome."
 msgstr "Nettoyages facultatifs de l'interface d'administration WordPress."
 
@@ -49,11 +49,11 @@ msgstr "Nettoyages facultatifs de l'interface d'administration WordPress."
 msgid "Security check failed. Please refresh the page and try again."
 msgstr "Échec de la vérification de sécurité. Veuillez actualiser la page et réessayer."
 
-#: includes/MetaMenu/MenuRegistry.php:149
+#: includes/MetaMenu/MenuRegistry.php:195
 msgid "EMCP Tools"
 msgstr "Outils EMCP"
 
-#: includes/MetaMenu/MenuRegistry.php:167
+#: includes/MetaMenu/MenuRegistry.php:213
 msgid "Edit post type"
 msgstr "Modifier le type de publication"
 
@@ -142,34 +142,42 @@ msgstr "Enregistrer le menu"
 msgid "Pages grouped under this menu."
 msgstr "Pages regroupées sous ce menu."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:171
+#: includes/AdminTweaks/AdminTweaksModule.php:167
 msgid "Clean admin bar"
 msgstr "Barre d’administration épurée"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:172
+#: includes/AdminTweaks/AdminTweaksModule.php:168
 msgid "Remove the WordPress logo, comments, and new-content nodes from the admin bar."
 msgstr "Retirer de la barre d’administration le logo WordPress, les commentaires et le bouton de création de contenu."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:190
+#: includes/AdminTweaks/AdminTweaksModule.php:186
 msgid "Clean dashboard"
 msgstr "Tableau de bord épuré"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:191
+#: includes/AdminTweaks/AdminTweaksModule.php:187
 msgid "Remove the default dashboard widgets and the welcome panel."
 msgstr "Supprimer les widgets par défaut du tableau de bord et le panneau de bienvenue."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:208
+#: includes/AdminTweaks/AdminTweaksModule.php:204
 msgid "Clean admin footer"
 msgstr "Pied de page d’administration épuré"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:209
+#: includes/AdminTweaks/AdminTweaksModule.php:205
 msgid "Hide the WordPress version and the “Thank you for creating with WordPress” footer text."
 msgstr "Masquer la version WordPress et le texte de pied de page « Thank you for creating with WordPress »."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:217
+#: includes/AdminTweaks/AdminTweaksModule.php:213
 msgid "Hide comments UI"
 msgstr "Masquer l’interface des commentaires"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:218
+#: includes/AdminTweaks/AdminTweaksModule.php:214
 msgid "Remove the Comments menu and comment metaboxes from admin screens."
 msgstr "Retirer des écrans d’administration le menu Commentaires et les boîtes de commentaires."
+
+#: includes/AdminTweaks/AdminTweaksModule.php:235
+msgid "Quiet LiteSpeed purge notices"
+msgstr "Masquer les notifications de purge LiteSpeed"
+
+#: includes/AdminTweaks/AdminTweaksModule.php:236
+msgid "Suppress the “Purge url …” and “Purged all caches successfully.” admin notices from LiteSpeed Cache."
+msgstr "Masquer les notifications d’administration « Purge url … » et « Purged all caches successfully. » de LiteSpeed Cache."

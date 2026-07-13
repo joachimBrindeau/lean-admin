@@ -18,7 +18,7 @@ final class AdminTweaksModuleTest extends TestCase
     {
         $keys = array_keys(AdminTweaksModule::definitions());
 
-        self::assertSame(['clean_admin_bar', 'clean_dashboard', 'clean_admin_footer', 'hide_comments_ui'], $keys);
+        self::assertSame(['clean_admin_bar', 'clean_dashboard', 'clean_admin_footer', 'hide_comments_ui', 'quiet_litespeed_purge'], $keys);
     }
 
     public function testDefinitionsDefaultOffAndAreCallable(): void
@@ -40,6 +40,7 @@ final class AdminTweaksModuleTest extends TestCase
                 'clean_dashboard' => false,
                 'clean_admin_footer' => false,
                 'hide_comments_ui' => false,
+                'quiet_litespeed_purge' => false,
             ],
             $map
         );
@@ -58,6 +59,7 @@ final class AdminTweaksModuleTest extends TestCase
         self::assertFalse($map['clean_dashboard']);
         self::assertFalse($map['clean_admin_footer']); // unset -> default
         self::assertFalse($map['hide_comments_ui']); // unset -> default
+        self::assertFalse($map['quiet_litespeed_purge']); // unset -> default
     }
 
     public function testEnabledMapMigratesAdminTweaksFromLeanSeo(): void
@@ -81,6 +83,7 @@ final class AdminTweaksModuleTest extends TestCase
                 'clean_dashboard' => false,
                 'clean_admin_footer' => true,
                 'hide_comments_ui' => true,
+                'quiet_litespeed_purge' => false,
             ],
             $GLOBALS['__lean_admin_test_options'][AdminTweaksModule::OPTION]
         );
@@ -100,6 +103,7 @@ final class AdminTweaksModuleTest extends TestCase
                 'clean_dashboard' => false,
                 'clean_admin_footer' => true,
                 'hide_comments_ui' => false,
+                'quiet_litespeed_purge' => false,
             ],
             $clean
         );
