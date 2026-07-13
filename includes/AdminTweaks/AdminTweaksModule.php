@@ -163,7 +163,7 @@ class AdminTweaksModule {
 	 */
 	public static function definitions(): array {
 		return [
-			'clean_admin_bar'    => [
+			'clean_admin_bar'       => [
 				'label'       => __( 'Clean admin bar', 'lean-admin' ),
 				'description' => __( 'Remove the WordPress logo, comments, and new-content nodes from the admin bar.', 'lean-admin' ),
 				'default'     => false,
@@ -182,7 +182,7 @@ class AdminTweaksModule {
 					);
 				},
 			],
-			'clean_dashboard'    => [
+			'clean_dashboard'       => [
 				'label'       => __( 'Clean dashboard', 'lean-admin' ),
 				'description' => __( 'Remove the default dashboard widgets and the welcome panel.', 'lean-admin' ),
 				'default'     => false,
@@ -200,7 +200,7 @@ class AdminTweaksModule {
 					);
 				},
 			],
-			'clean_admin_footer' => [
+			'clean_admin_footer'    => [
 				'label'       => __( 'Clean admin footer', 'lean-admin' ),
 				'description' => __( 'Hide the WordPress version and the “Thank you for creating with WordPress” footer text.', 'lean-admin' ),
 				'default'     => false,
@@ -209,7 +209,7 @@ class AdminTweaksModule {
 					add_filter( 'admin_footer_text', '__return_empty_string', 11 );
 				},
 			],
-			'hide_comments_ui'   => [
+			'hide_comments_ui'      => [
 				'label'       => __( 'Hide comments UI', 'lean-admin' ),
 				'description' => __( 'Remove the Comments menu and comment metaboxes from admin screens.', 'lean-admin' ),
 				'default'     => false,
@@ -229,6 +229,19 @@ class AdminTweaksModule {
 							}
 						}
 					);
+				},
+			],
+			'quiet_litespeed_purge' => [
+				'label'       => __( 'Quiet LiteSpeed purge notices', 'lean-admin' ),
+				'description' => __( 'Suppress the “Purge url …” and “Purged all caches successfully.” admin notices from LiteSpeed Cache.', 'lean-admin' ),
+				'default'     => false,
+				// LiteSpeed skips every purge admin notice when this constant is
+				// defined before its purge actions fire (LiteSpeed\Purge). Native
+				// switch, no notice-buffer manipulation.
+				'callback'    => static function (): void {
+					if ( ! defined( 'LITESPEED_PURGE_SILENT' ) ) {
+						define( 'LITESPEED_PURGE_SILENT', true );
+					}
 				},
 			],
 		];
