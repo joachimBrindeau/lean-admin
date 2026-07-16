@@ -32,4 +32,13 @@ add_action(
 
 require_once __DIR__ . '/includes/bootstrap.php';
 
+add_filter(
+	'plugin_action_links_' . plugin_basename( __FILE__ ),
+	static function ( array $links ): array {
+		$url = admin_url( 'tools.php?page=lean-admin-tweaks' );
+		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'lean-admin' ) . '</a>' );
+		return $links;
+	}
+);
+
 register_uninstall_hook( __FILE__, [ 'LeanAdmin\Plugin', 'uninstall' ] );
