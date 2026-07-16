@@ -36,7 +36,10 @@ class AdminTweaksModule {
 
 		// Admin-only chrome: never attach these cleanup hooks on the frontend.
 		if ( is_admin() ) {
-			add_action( 'init', [ $this, 'applyEnabled' ] );
+			// Earliest practical priority: quiet_litespeed_purge must define
+			// LITESPEED_PURGE_SILENT before LiteSpeed's own init-time purge
+			// callbacks run, or purge notices still queue.
+			add_action( 'init', [ $this, 'applyEnabled' ], PHP_INT_MIN );
 		}
 	}
 

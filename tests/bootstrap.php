@@ -180,9 +180,23 @@ if (! function_exists('__')) {
 }
 
 if (! function_exists('add_action')) {
-    function add_action(...$args): bool
+    function add_action(string $hook, $callback, int $priority = 10, int $accepted_args = 1): bool
     {
+        $GLOBALS['__lean_admin_test_actions'][] = [
+            'hook' => $hook,
+            'callback' => $callback,
+            'priority' => $priority,
+            'accepted_args' => $accepted_args,
+        ];
+
         return true;
+    }
+}
+
+if (! function_exists('is_admin')) {
+    function is_admin(): bool
+    {
+        return $GLOBALS['__lean_admin_test_is_admin'] ?? true;
     }
 }
 

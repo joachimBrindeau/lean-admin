@@ -12,6 +12,20 @@ final class AdminTweaksModuleTest extends TestCase
     protected function setUp(): void
     {
         $GLOBALS['__lean_admin_test_options'] = [];
+        $GLOBALS['__lean_admin_test_actions'] = [];
+    }
+
+    public function testRegisterAppliesEnabledTweaksAtEarliestInitPriority(): void
+    {
+        (new AdminTweaksModule())->register();
+
+        self::assertSame(
+            PHP_INT_MIN,
+            array_values(array_filter(
+                $GLOBALS['__lean_admin_test_actions'],
+                static fn (array $action): bool => 'init' === $action['hook'] && 'applyEnabled' === $action['callback'][1]
+            ))[0]['priority']
+        );
     }
 
     public function testDefinitionsExposeTheMigratedAdminTweaks(): void
