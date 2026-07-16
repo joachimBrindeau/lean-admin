@@ -29,19 +29,19 @@ msgstr "Regroupement du menu d'administration et ajustements légers de l'interf
 msgid "Joachim Brindeau"
 msgstr "Joachim Brindeau"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:73
-#: includes/AdminTweaks/AdminTweaksModule.php:74
-#: includes/AdminTweaks/AdminTweaksModule.php:145
+#: includes/AdminTweaks/AdminTweaksModule.php:76
+#: includes/AdminTweaks/AdminTweaksModule.php:77
+#: includes/AdminTweaks/AdminTweaksModule.php:148
 msgid "Admin Tweaks"
 msgstr "Ajustements de l'administration"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:141
+#: includes/AdminTweaks/AdminTweaksModule.php:144
 #: includes/MetaMenu/MetaMenuModule.php:55
 #: templates/metamenu-editor.php:18
 msgid "You do not have permission to access this page."
 msgstr "Vous n'avez pas la permission d'accéder à cette page."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:146
+#: includes/AdminTweaks/AdminTweaksModule.php:149
 msgid "Opt-in cleanups for the WordPress admin chrome."
 msgstr "Nettoyages facultatifs de l'interface d'administration WordPress."
 
@@ -142,42 +142,46 @@ msgstr "Enregistrer le menu"
 msgid "Pages grouped under this menu."
 msgstr "Pages regroupées sous ce menu."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:167
+#: includes/AdminTweaks/AdminTweaksModule.php:170
 msgid "Clean admin bar"
 msgstr "Barre d’administration épurée"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:168
+#: includes/AdminTweaks/AdminTweaksModule.php:171
 msgid "Remove the WordPress logo, comments, and new-content nodes from the admin bar."
 msgstr "Retirer de la barre d’administration le logo WordPress, les commentaires et le bouton de création de contenu."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:186
+#: includes/AdminTweaks/AdminTweaksModule.php:189
 msgid "Clean dashboard"
 msgstr "Tableau de bord épuré"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:187
+#: includes/AdminTweaks/AdminTweaksModule.php:190
 msgid "Remove the default dashboard widgets and the welcome panel."
 msgstr "Supprimer les widgets par défaut du tableau de bord et le panneau de bienvenue."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:204
+#: includes/AdminTweaks/AdminTweaksModule.php:207
 msgid "Clean admin footer"
 msgstr "Pied de page d’administration épuré"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:205
+#: includes/AdminTweaks/AdminTweaksModule.php:208
 msgid "Hide the WordPress version and the “Thank you for creating with WordPress” footer text."
 msgstr "Masquer la version WordPress et le texte de pied de page « Thank you for creating with WordPress »."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:213
+#: includes/AdminTweaks/AdminTweaksModule.php:216
 msgid "Hide comments UI"
 msgstr "Masquer l’interface des commentaires"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:214
+#: includes/AdminTweaks/AdminTweaksModule.php:217
 msgid "Remove the Comments menu and comment metaboxes from admin screens."
 msgstr "Retirer des écrans d’administration le menu Commentaires et les boîtes de commentaires."
 
-#: includes/AdminTweaks/AdminTweaksModule.php:235
+#: includes/AdminTweaks/AdminTweaksModule.php:238
 msgid "Quiet LiteSpeed purge notices"
 msgstr "Masquer les notifications de purge LiteSpeed"
 
-#: includes/AdminTweaks/AdminTweaksModule.php:236
+#: includes/AdminTweaks/AdminTweaksModule.php:239
 msgid "Suppress the “Purge url …” and “Purged all caches successfully.” admin notices from LiteSpeed Cache."
 msgstr "Masquer les notifications d’administration « Purge url … » et « Purged all caches successfully. » de LiteSpeed Cache."
+
+#: lean-admin.php:39
+msgid "Settings"
+msgstr "Réglages"
