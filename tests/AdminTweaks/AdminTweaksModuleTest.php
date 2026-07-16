@@ -15,6 +15,25 @@ final class AdminTweaksModuleTest extends TestCase
         $GLOBALS['__lean_admin_test_actions'] = [];
     }
 
+    public function testRegisterAttachesApplyEnabledAtEarliestInitPriority(): void
+    {
+        $GLOBALS['__lean_admin_test_is_admin'] = true;
+
+        (new AdminTweaksModule())->register();
+
+        $initApply = array_values(array_filter(
+            $GLOBALS['__lean_admin_test_actions'],
+            static fn (array $a): bool => $a['hook'] === 'init'
+                && is_array($a['callback'])
+                && ($a['callback'][1] ?? null) === 'applyEnabled'
+        ));
+
+        self::assertCount(1, $initApply);
+        // quiet_litespeed_purge must define LITESPEED_PURGE_SILENT before
+        // LiteSpeed's own init-time purge callbacks run (WP-42).
+        self::assertSame(PHP_INT_MIN, $initApply[0]['priority']);
+    }
+
     public function testRegisterAppliesEnabledTweaksAtEarliestInitPriority(): void
     {
         (new AdminTweaksModule())->register();
