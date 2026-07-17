@@ -7,7 +7,10 @@
  * Author: Joachim Brindeau
  * License: GPL-2.0-or-later
  * Requires PHP: 8.1
- * Requires at least: 6.0
+ * Requires at least: 6.5
+ * Tested up to: 7.0
+ * Update URI: false
+ * Network: false
  * Text Domain: lean-admin
  * Domain Path: /languages
  */
