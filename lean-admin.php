@@ -38,6 +38,10 @@ require_once __DIR__ . '/includes/bootstrap.php';
 add_filter(
 	'plugin_action_links_' . plugin_basename( __FILE__ ),
 	static function ( array $links ): array {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return $links;
+		}
+
 		$url = admin_url( 'tools.php?page=lean-admin-tweaks' );
 		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'lean-admin' ) . '</a>' );
 		return $links;
